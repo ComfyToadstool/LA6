@@ -1,5 +1,8 @@
 package edu.wmich.cs1120.StanRitsema.JenniferSmith.LA6;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * A version of a stack implemented with two queues
  * 
@@ -28,6 +31,16 @@ public class QStack<T> {
 	 */
 	public T push(T data) {
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+		
+		// insert new element at end of first queue
+		queue1.add(data);
+		
+		// increment size
+		size++;
+		
+		// return the added element
+		return data;
+		
 	}
 
 	/**
@@ -37,6 +50,27 @@ public class QStack<T> {
 	 */
 	public T pop() {
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+		
+		// move all but last element of queue1 to queue2
+		while( queue1.size() > 1 ) {
+			T ele = queue1.poll();
+			queue2.add(ele);
+		}
+		
+		// Get the last element of queue1
+		T target = queue1.poll();
+		
+		// Reset the arrays
+		queue1 = queue2;
+		Queue<T> temp = new LinkedList<T>();
+		queue2 = temp;
+		
+		// decrement size
+		size--;
+		
+		// return the popped element
+		return target;
+		
 	}
 
     /**
