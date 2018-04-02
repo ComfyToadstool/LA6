@@ -1,4 +1,6 @@
-package edu.wmich.cs1120.StanRitsema.JenniferSmith.LA6;
+package edu.wmich.cs1120.StanRitsema.LA6;
+
+import java.util.Stack;
 
 /**
  * A minimum value stack stores elements in order of size: the smallest 
@@ -31,6 +33,29 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public T push(T data){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	// push elements from stack1 onto stack2
+    	// until data is greater than the next element of stack 2
+    	while( data.compareTo(stack1.peek()) < 0 ) {
+    		stack2.push(stack1.pop());
+    	}
+    	stack2.push(data);
+    	
+    	// push the rest of stack1 onto stack2
+    	while( !stack1.isEmpty() ) {
+    		stack2.push(stack1.pop());
+    	}
+    	
+    	// increment size
+    	size++;
+    	
+    	// push all of stack2 back onto stack2
+    	while( !stack2.isEmpty() ) {
+    		stack1.push(stack2.pop());
+    	}
+    	
+    	// return the added element
+    	return data;
     }
 
     /**
@@ -39,6 +64,8 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public T minValue(){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	return stack1.peek();
     }
 
     /**
@@ -47,6 +74,12 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public T pop(){ 
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	// decrement size
+    	size--;
+    	
+    	// pop desired element
+    	return stack1.pop();
     }
 
     /**
@@ -55,6 +88,8 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public boolean isEmpty(){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	return (size == 0);
     }
 
     /**

@@ -1,4 +1,4 @@
-package edu.wmich.cs1120.StanRitsema.JenniferSmith.LA6;
+package edu.wmich.cs1120.StanRitsema.LA6;
 
 import java.util.LinkedList;
 import java.util.Queue;
