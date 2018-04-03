@@ -8,7 +8,9 @@ public class Read {
 	// YOU NEED TO REPLACE ALL ‘T’s WITH THE APPROPRIATE CLASS NAME FOR THE TYPE 
 	// PARAMETER. WHAT IS THE TYPE OF ELEMENTS READ FROM THE INPUT FILE?
 		
-	private ArrayList <Short> store; 
+	private ArrayList<Short> store; 
+	int shortLength = 2;
+	private static boolean DEBUG = false;
 		
 	public Read(ArrayList<Short> store) {
 		// TODO Auto-generated constructor stub
@@ -27,12 +29,41 @@ public class Read {
 	// “store”.
 			
 			while( is.available() > 0 ) {
-				store.add(is.readShort());
+				
+				short temp = is.readShort();
+				
+				if( DEBUG ) {
+					System.out.println("Added short : " + temp);
+				}
+				
+				store.add(temp);
+				
 			}
+			
+			is.close();
 
 		} catch (IOException ex) {
+			System.out.println("Error within readFileInputStream method");
 			ex.printStackTrace();
 		}
-	} 
+		
+		
+	}
+	
+	/**
+	 * Helper method to get element of store array at location index.
+	 * 
+	 * @param index
+	 * @return short at index of store array
+	 */
+	public short getShort( int index ) {
+		
+		if( index > store.size() ) {
+			throw new ArrayIndexOutOfBoundsException();
+		}else {
+			return store.get(index);
+		}
+		
+	}
 	
 }

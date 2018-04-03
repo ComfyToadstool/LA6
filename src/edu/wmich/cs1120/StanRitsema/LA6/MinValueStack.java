@@ -1,5 +1,6 @@
 package edu.wmich.cs1120.StanRitsema.LA6;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -9,6 +10,9 @@ import java.util.Stack;
  * popped off the stack.
  */ 
 public class MinValueStack<T extends Comparable<T>> {
+	
+	// used for debugging messages
+	private static boolean DEBUG = true;
 
 	private Stack<T> stack1;
     private Stack<T> stack2;
@@ -34,28 +38,45 @@ public class MinValueStack<T extends Comparable<T>> {
     public T push(T data){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
     	
-    	// push elements from stack1 onto stack2
-    	// until data is greater than the next element of stack 2
-    	while( data.compareTo(stack1.peek()) < 0 ) {
-    		stack2.push(stack1.pop());
+    	// base case
+    	if( getSize() == 0 ) {
+    		
+    		stack1.push(data);
+    		size++;
+    		return data;
+    		
     	}
+    	
+    	// move all elements less than data from stack1 to stack2
+    	try {
+    		
+    		while( data.compareTo(stack1.peek()) > 0 ) {
+        		stack2.push(stack1.pop());
+        	}
+    		
+    	}catch(EmptyStackException e) {
+    		
+    	}
+    	
+    	// move data onto stack2
     	stack2.push(data);
     	
-    	// push the rest of stack1 onto stack2
+    	// move the rest of stack1 to stack2
     	while( !stack1.isEmpty() ) {
     		stack2.push(stack1.pop());
+    	}
+    	
+    	// move stack2 elements back to stack1
+    	while( !stack2.isEmpty() ) {
+    		stack1.push(stack2.pop());
     	}
     	
     	// increment size
     	size++;
     	
-    	// push all of stack2 back onto stack2
-    	while( !stack2.isEmpty() ) {
-    		stack1.push(stack2.pop());
-    	}
-    	
-    	// return the added element
+    	// return added value
     	return data;
+    	
     }
 
     /**
@@ -64,6 +85,11 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public T minValue(){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	// make sure stack isn't empty
+    	if( isEmpty() ) {
+    		throw new EmptyStackException();
+    	}
     	
     	return stack1.peek();
     }
@@ -74,6 +100,11 @@ public class MinValueStack<T extends Comparable<T>> {
      */
     public T pop(){ 
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	// make sure stack isn't empty
+    	if( isEmpty() ) {
+    		throw new EmptyStackException();
+    	}
     	
     	// decrement size
     	size--;

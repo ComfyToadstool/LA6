@@ -21,19 +21,67 @@ public class MainActivity {
 		System.out.println("The values pushed onto the stack are:");
 		// INCLUDE CODE TO STORE ALL ELEMENTS FROM THE ARRAYLIST IN BOTH “stack” AND 
 		// “mVStack”
+		
+		// initialize a counter
+		int i = 0;
+		
+		try {
+			while(true) {
+				
+				// add element at position i to both stacks
+				System.out.print(stack.push(read.getShort(i)) + " ");
+				mVStack.push(read.getShort(i));
+				
+				// increment i
+				i++;
+			}
+		}catch(IndexOutOfBoundsException e) {
+			
+		}
+		
+		// reset the counter for use with the queue
+		i = 0;
 
 		System.out.println("\n\nThe values popped off the stack in order are:");
 		// INCLUDE CODE TO REMOVE AND DISPLAY ALL ELEMENTS STORED IN “stack”.
+		
+		while( stack.getSize() > 0 ) {
+			System.out.print(stack.pop() + " ");
+		}
 		
 		System.out.println("\n\nThe min value (from the minimum value stack) is:"+mVStack.minValue());
 		
 		System.out.println("\nThe values popped off the minimum value stack in order are:");
 		// INCLUDE CODE TO REMOVE AND DISPLAY ALL ELEMENTS STORED IN “mVStack”.
+		
+		while( mVStack.getSize() > 0 ) {
+			System.out.print(mVStack.pop() + " ");
+		}
+		System.out.println();
 
 		System.out.println("\n\nThe values enqueued onto the queue are:");
 		// INCLUDE CODE TO DISPLAY AND STORE ALL ELEMENTS FROM THE ARRAYLIST IN “queue”.
+		
+		try {
+			while(true) {
+				
+				// add element at position i to queue
+				System.out.print(queue.enqueue(read.getShort(i)) + " ");
+				
+				// increment i
+				i++;
+			}
+		}catch(IndexOutOfBoundsException e) {
+			
+		}
+		
 		System.out.println("\n\nThe values dequeued from the queue in order are:");
 		// INCLUDE CODE TO REMOVE AND DISPLAY ALL ELEMENTS STORED IN “queue”.
+		
+		while( queue.getSize() > 0 ) {
+			System.out.print(queue.dequeue() + " ");
+		}
+		System.out.println();
 
 	}
 

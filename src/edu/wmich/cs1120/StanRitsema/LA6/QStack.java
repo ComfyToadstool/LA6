@@ -10,6 +10,9 @@ import java.util.Queue;
  */
 public class QStack<T> {
 	
+	// used for debugging messages
+	private static boolean DEBUG = false;
+	
 	private Queue<T> queue1;
 	private Queue<T> queue2;
 	private int size;
@@ -37,6 +40,11 @@ public class QStack<T> {
 		
 		// increment size
 		size++;
+		
+		// debug print statement
+		if( DEBUG ) {
+			System.out.println("Added to QStack: " + data);
+		}
 		
 		// return the added element
 		return data;
@@ -67,6 +75,11 @@ public class QStack<T> {
 		
 		// decrement size
 		size--;
+		
+		// debug print statement
+		if( DEBUG ) {
+			System.out.println("Current head of queue1: " + queue1.peek());
+		}
 		
 		// return the popped element
 		return target;

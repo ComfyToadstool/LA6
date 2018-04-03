@@ -7,6 +7,9 @@ import java.util.Stack;
  * @param <T> Type parameter for Generic class SQueue
  */
 public class SQueue<T> {
+	
+	// used for debugging messages
+	private static boolean DEBUG = true;
 
 	private Stack<T> stack1;
     private Stack<T> stack2;
