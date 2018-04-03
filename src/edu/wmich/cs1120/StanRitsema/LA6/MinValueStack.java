@@ -12,7 +12,7 @@ import java.util.Stack;
 public class MinValueStack<T extends Comparable<T>> {
 	
 	// used for debugging messages
-	private static boolean DEBUG = true;
+	private static boolean DEBUG = false;
 
 	private Stack<T> stack1;
     private Stack<T> stack2;
@@ -39,7 +39,7 @@ public class MinValueStack<T extends Comparable<T>> {
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
     	
     	// base case
-    	if( getSize() == 0 ) {
+    	if( isEmpty() ) {
     		
     		stack1.push(data);
     		size++;
@@ -51,6 +51,9 @@ public class MinValueStack<T extends Comparable<T>> {
     	try {
     		
     		while( data.compareTo(stack1.peek()) > 0 ) {
+    			if( DEBUG ) {
+    				System.out.println("pushing to stack2: " + stack1.peek());
+    			}
         		stack2.push(stack1.pop());
         	}
     		
@@ -63,11 +66,17 @@ public class MinValueStack<T extends Comparable<T>> {
     	
     	// move the rest of stack1 to stack2
     	while( !stack1.isEmpty() ) {
+    		if( DEBUG ) {
+				System.out.println("pushing to stack2: " + stack1.peek());
+			}
     		stack2.push(stack1.pop());
     	}
     	
     	// move stack2 elements back to stack1
     	while( !stack2.isEmpty() ) {
+    		if( DEBUG ) {
+				System.out.println("pushing to stack1: " + stack2.peek());
+			}
     		stack1.push(stack2.pop());
     	}
     	
@@ -120,7 +129,7 @@ public class MinValueStack<T extends Comparable<T>> {
     public boolean isEmpty(){
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
     	
-    	return (size == 0);
+    	return (getSize() == 0);
     }
 
     /**

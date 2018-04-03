@@ -1,5 +1,6 @@
 package edu.wmich.cs1120.StanRitsema.LA6;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -8,9 +9,6 @@ import java.util.Stack;
  */
 public class SQueue<T> {
 	
-	// used for debugging messages
-	private static boolean DEBUG = true;
-
 	private Stack<T> stack1;
     private Stack<T> stack2;
     private int size;
@@ -39,7 +37,7 @@ public class SQueue<T> {
     	size++;
     	
     	// return added element
-    	return data;
+    	return stack1.peek();
     	
     }
 
@@ -49,6 +47,10 @@ public class SQueue<T> {
      */
     public T dequeue(){
     	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+    	
+    	if( getSize() == 0 ) {
+    		throw new EmptyStackException();
+    	}
     	
     	// if stack2 is empty, move everything from stack1 to it
     	if( stack2.isEmpty() ) {

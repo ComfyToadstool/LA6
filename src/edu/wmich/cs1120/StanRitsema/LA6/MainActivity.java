@@ -2,11 +2,24 @@ package edu.wmich.cs1120.StanRitsema.LA6;
 
 import java.util.ArrayList;
 
+/**
+ * Controller class for this project.
+ * 
+ * @author Stan
+ *
+ */
 public class MainActivity {
 	
 	// YOU NEED TO REPLACE ALL ‘T’s WITH THE APPROPRIATE CLASS NAME FOR THE TYPE 
 	// PARAMETER. WHAT IS THE TYPE OF ELEMENTS READ FROM THE INPUT FILE?
 
+	/**
+	 * Main stage for the project.  Creates two stacks and a queue from the other 
+	 * classes.  Uses read to get data from a .dat file, puts in all three objects, 
+	 * and takes it out of all of them again.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		ArrayList<Short> store = new ArrayList<>();
@@ -57,7 +70,6 @@ public class MainActivity {
 		while( mVStack.getSize() > 0 ) {
 			System.out.print(mVStack.pop() + " ");
 		}
-		System.out.println();
 
 		System.out.println("\n\nThe values enqueued onto the queue are:");
 		// INCLUDE CODE TO DISPLAY AND STORE ALL ELEMENTS FROM THE ARRAYLIST IN “queue”.

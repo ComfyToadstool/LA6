@@ -1,5 +1,6 @@
 package edu.wmich.cs1120.StanRitsema.LA6;
 
+import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -58,6 +59,10 @@ public class QStack<T> {
 	 */
 	public T pop() {
 	// INCLUDE CODE TO PERFORM REQUIRED ACTION(S).
+		
+		if( getSize() == 0 ) {
+			throw new EmptyStackException();
+		}
 		
 		// move all but last element of queue1 to queue2
 		while( queue1.size() > 1 ) {

@@ -3,19 +3,239 @@ Pseudocode for CS 1120 Project 6
 	
 Author: Stan Ritsema
 
+Link to project in Git: 
+
 class MainActivity
+
+	import ArrayList
+	
+	method main
+		create an ArrayList of type Short named store and set it equal to 
+			a new ArrayList
+		create a Read named read and set it equal to a new Read with 
+			parameter store
+		create a new QStack of type Short named stack and set it equal to 
+			a new QStack
+		create a new SQueue of type Short named queue and set it equal to 
+			a new SQueue
+		create a new MinValueStack of type Short named mVStack and set it 
+			equal to a new MinValueStack
+		
+		call read's readFileInputStream with parameter "TestData.dat"
+		print the line "The values pushed onto the stack are:" to the console
+		create an integer named i and set it equal to 0
+		try to
+			while true
+				print a line composed of the result of calling stack's push
+					method, with its parameter being the result of calling 
+					read's getShort method with parameter i, and " " to 
+					the console
+				call mVStack's push method, its parameter being the result 
+					of calling read's getShort method with parameter i
+				increment i
+		catch an IndexOutOfBoundsException named e
+		set i equal to 0
+		
+		print the line "The values popped off the stack in order are:" to the
+			console
+		while the result of calling stack's getSize method is greater than 0
+			print a line composed of the result of calling stack's pop 
+				method and " " to the console
+				
+		print a line composed of "The min value (from the minimum value stack)",
+			" is:", and the result of calling mVStack's minValue method to the
+				console
+		print the line "The values popped off the minimum value stack in order"
+			and " are:" to the console
+		while the result of calling mVStack's getSize method is greater than 0
+			print a line composed of the result of calling mvStack's pop 
+				method and " " to the console
+		
+		print the line "The values enqueued onto the queue are:" to the console
+		try to
+			while true
+				print a line composed of the result of calling queue's enqueue
+					method, with its parameter being the result of calling 
+					read's getShort method with parameter i, and " " to 
+					the console
+				increment i
+		catch an IndexOutOfBoundsException named e
+		print the line "The values dequeued from the queue in order are:" to 
+			the console
+		while the result of calling queue's getSize method is greater than 0
+			print a line composed of the result of calling queue's dequeue 
+				method and " " to the console
+		print a new blank line to the console
+		
 
 
 class MinValueStack
 
+	import Stack
+	import EmptyStackException
+
+	class MinValueStack is of type T, where T extends Comparable 
+		of type T
+		
+	create a Stack of type T named stack1
+	create a Stack of type T named stack2
+	create an integer named size
+	
+	constructor MinValueStack
+		set stack1 equal to a new Stack of type T
+		set stack2 equal to a new Stack of type T
+		set size equal to 0
+		
+	method push( T data )
+		if the result of isEmpty is true
+			call stack1's push method with parameter data
+			increment size
+			return data
+		try to
+			while the result of calling data's compareTo method, with its 
+				parameter being the result of calling stack1's peek method, 
+				is greater than 0
+				call stack2's push method, with its parameter being the 
+					result of calling stack1's pop method
+		catch an EmptyStackException
+		call stack2's push method with parameter data
+		while the result of calling stack1's isEmpty method is false
+			call stack2's push method, its parameter being the result of 
+				calling stack1's pop method
+		while the result of calling stack2's isEmpty method is false
+			call stack1's push method, its parameter being the result of 
+				calling stack2's pop method
+		increment size
+		return data
+		
+	method minValue
+		if the result of isEmpty is true
+			throw a new EmptyStackException
+		return the result of calling stack1's peek method
+		
+	method pop
+		if the result of isEmpty is true
+			throw a new EmptyStackException
+		decrement size
+		return the result of calling stack1's pop method
+		
+	method isEmpty
+		return the result of checking whether the result of calling getSize 
+			is equal to 0
+			
+	method getSize
+		return size
+		 
 
 
 class QStack
 
+	import EmptyStackException
+
+	class QStack is of type T
+	
+	create a Queue of type T named queue1
+	create a Queue of type T named queue2
+	create an integer named size
+	
+	constructor QStack
+		set queue1 equal to a new LinkedList of type T
+		set queue2 equal to a new LinkedList of type T
+		set size equal to 0
+		
+	method push( T data )
+		call queue1's add method with parameter data
+		increment size
+		return data
+		
+	method pop
+		if the result of getSize is equal to 0
+			throw a new EmptyStackException
+		while the result of calling queue1's size method is greater than 1
+			create a T named ele and set it equal to the result of 
+				calling queue1's poll method
+			call queue2's add method with parameter ele
+		create a T named target and set it equal to the result of calling 
+			queue1's poll method
+		set queue1 equal to queue2
+		create a Queue of type T named temp and set it equal to a new 
+			LinkedList of type T
+		set queue2 equal to temp
+		decrement size
+		return target
+		
+	method getSize
+		return size
+		
+
 
 class Read
+
+	import java.io library
+	import ArrayList
+
+	create an ArrayList of type Short named store
+	
+	constructor Read( ArrayList of type Short store )
+		set this instance' store equal to store
+		
+	method readFileInputStream( String filename )
+		try to
+			create an InputStream named inputStream and set it equal to a 
+				new FileInputStream with parameter filename
+			create a DataInputStream named is and set it equal to a new 
+				DataInputStream, its parameter being a new 
+				BufferedInputStream with parameter inputStream
+			while the result of is' available method is greater than 0
+				create a short named temp and set it equal to the result 
+					of calling is' readShort method
+				call store's add method with parameter temp
+			call is' close method
+		catch an IOException named ex
+			print the line "Error within readFileInputStream method" to 
+				the console
+			call ex' printStackTrace method
+	
+	method getShort( integer index )
+		if index is greater than the result of calling store's size method
+			throw a new ArrayIndexOutOfBoundsException
+		else
+			return the result of calling store's get method with parameter
+				index
 
 
 class SQueue
 
+	import Stack
+	import EmptyStackException
 
+	class SQueue is of type T
+
+	create a Stack of type T named stack1
+	create a Stack of type T named stack2
+	create an integer named size
+	
+	constructor SQueue
+		set stack1 equal to a new Stack of type T
+		set stack2 equal to a new Stack of type T
+		set size equal to 0
+		
+	method enqueue( T data )
+		call stack1's push method with parameter data
+		increment size
+		return the result of stack1's peek method
+
+	method dequeue
+		if the result of calling getSize is 0
+			throw a new EmptyStackException
+		if the result of calling stack2's isEmpty method is true
+			while the result of calling stack1's isEmpty method is false
+				call stack2's push method, with its parameter being the 
+					result of calling stack1's pop method
+		decrement size
+		return the result of calling stack2's pop method
+		
+	method getSize
+		return size
+		
+		

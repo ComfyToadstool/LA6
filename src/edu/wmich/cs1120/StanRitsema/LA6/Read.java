@@ -3,13 +3,19 @@ package edu.wmich.cs1120.StanRitsema.LA6;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * A file reading class.  Stores shorts from a .dat file in an ArrayList, they can 
+ * be retreived with the helper method.
+ * 
+ * @author Stan
+ *
+ */
 public class Read {
 
 	// YOU NEED TO REPLACE ALL ‘T’s WITH THE APPROPRIATE CLASS NAME FOR THE TYPE 
 	// PARAMETER. WHAT IS THE TYPE OF ELEMENTS READ FROM THE INPUT FILE?
 		
 	private ArrayList<Short> store; 
-	int shortLength = 2;
 	private static boolean DEBUG = false;
 		
 	public Read(ArrayList<Short> store) {
